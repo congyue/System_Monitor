@@ -13,6 +13,23 @@
 
 using namespace std;
 
+std::string ProcessParser::getVmSize(std::string pid) {
+  std::string name = "VmData";
+  std::string line;
+  std::ifstream stream;
+  Util::getStream(Path::basePath() + pid + Path::statusPath(), stream);
+  float result = 0;
+  while(std::getline(stream, line)) {
+    if (line.compare(0, name.size(), name) == 0) {
+      std::istringstream iss(line);
+      std::istream_iterator<string> beg(iss), end;
+      std::vector<string> values(beg, end);
+      result = (std::stof(values[1])/float(1024*1024));
+      break;
+    }
+  }
+  return std::to_string(result);
+}
 
 char* getCString(std::string str){
     char * cstr = new char [str.length()+1];
