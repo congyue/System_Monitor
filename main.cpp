@@ -145,6 +145,23 @@ string ProcessParser::getProcUser(string pid)
     return "";
 }
 
+int ProcessParser::getNumberOfCores()
+{
+    // Get the number of host cpu cores
+    string line;
+    string name = "cpu cores";
+    ifstream stream;
+    Util::getStream((Path::basePath() + "cpuinfo"), stream);
+    while(getline(stream, line)) {
+      if (line.compare(0, name.size(), name) == 0) {
+        istringstream iss(line);
+        istream_iterator<string> beg(iss), end;
+        vector<string> values(beg, end);
+        return stoi(values[3]);
+      }
+    }
+    return 0;
+}
 char* getCString(std::string str){
     char * cstr = new char [str.length()+1];
     std::strcpy (cstr, str.c_str());
