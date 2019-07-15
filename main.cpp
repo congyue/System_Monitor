@@ -71,6 +71,18 @@ std::string ProcessParser::getProcUpTime(std::string pid) {
   return to_string(float(stof(values[13])/sysconf(_SC_CLK_TCK)));
 }
 
+long int ProcessParser::getSysUpTime()
+{
+    string line;
+    ifstream stream;
+    Util::getStream((Path::basePath() + Path::upTimePath()), stream);
+    getline(stream,line);
+    istringstream buf(line);
+    istream_iterator<string> beg(buf), end;
+    vector<string> values(beg, end);
+    return stoi(values[0]);
+}
+
 char* getCString(std::string str){
     char * cstr = new char [str.length()+1];
     std::strcpy (cstr, str.c_str());
