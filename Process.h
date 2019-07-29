@@ -14,17 +14,16 @@ private:
     string cmd;
     string cpu;
     string mem;
-    string upTime;
+    string up_time;
 
 public:
     Process(string pid){
         this->pid = pid;
         this->user = ProcessParser::getProcUser(pid);
-        //TODOs:
-        //complete for mem
-        //complete for cmd
-        //complete for upTime
-        //complete for cpu
+        this->mem = ProcessParser::getVmSize(pid);
+        this->cmd = ProcessParser::getCmd(pid);
+        this->up_time = ProcessParser::getProcUpTime(pid);
+        this->cpu  = ProcessParser::getCpuPercent(pid);
     }
     void setPid(int pid);
     string getPid()const;
