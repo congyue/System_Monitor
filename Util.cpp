@@ -1,15 +1,6 @@
 #include <string>
 #include <fstream>
-
-// Classic helper function
-class Util {
-
-public:
-
-static std::string convertToTime ( long int input_seconds );
-static std::string getProgressBar(std::string percent);
-static void getStream(std::string path, std::ifstream& stream);
-};
+#include "Util.h"
 
 std::string Util::convertToTime (long int input_seconds){
 long minutes = input_seconds / 60;
