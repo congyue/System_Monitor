@@ -13,11 +13,29 @@
 
 using namespace std;
 
+float get_sys_active_cpu_time(vector<string> values)
+{
+    return (stof(values[S_USER]) +
+            stof(values[S_NICE]) +
+            stof(values[S_SYSTEM]) +
+            stof(values[S_IRQ]) +
+            stof(values[S_SOFTIRQ]) +
+            stof(values[S_STEAL]) +
+            stof(values[S_GUEST]) +
+            stof(values[S_GUEST_NICE]));
+}
+
+float get_sys_idle_cpu_time(vector<string>values)
+{
+    return (stof(values[S_IDLE]) + stof(values[S_IOWAIT]));
+}
+
 char* getCString(std::string str){
     char * cstr = new char [str.length()+1];
     std::strcpy (cstr, str.c_str());
     return cstr;
 }
+
 void writeSysInfoToConsole(SysInfo sys, WINDOW* sys_win){
     sys.setAttributes();
 
