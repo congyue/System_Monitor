@@ -29,7 +29,7 @@ public:
         return "/status";
     }
     static string statPath(){
-        return "stat";
+        return "/stat";
     }
     static string upTimePath(){
         return "uptime";

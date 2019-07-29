@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <iostream>
 #include <thread>
 #include <chrono>
@@ -300,6 +301,14 @@ vector<string> ProcessParser::getPidList()
     if(closedir(dir))
         throw std::runtime_error(std::strerror(errno));
     return container;
+}
+
+bool ProcessParser::isPidExisting(std::string pid) {
+  vector<string> pidList = getPidList();
+  if (std::find(pidList.begin(), pidList.end(), pid) != pidList.end())
+    return true;
+  else
+    return false;
 }
 
 string ProcessParser::getCmd(string pid)

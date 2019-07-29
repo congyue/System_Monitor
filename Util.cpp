@@ -42,7 +42,7 @@ void Util::getStream(std::string path, std::ifstream& stream){
     stream.open (path, std::ifstream::in);
     if (!stream && !stream.is_open()){
         stream.close();
-        throw std::runtime_error("Non - existing PID");
+        throw std::runtime_error("Failed to open stream for " + path);
     }
     //return stream;
 }
