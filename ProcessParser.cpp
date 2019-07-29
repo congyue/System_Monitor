@@ -337,6 +337,9 @@ string ProcessParser::getProcUser(string pid)
             break;
         }
     }
+    stream.close();
+    stream.clear();
+
     Util::getStream("/etc/passwd", stream);
     name =("x:" + result);
     // Searching for name of the user with selected UID
@@ -346,6 +349,8 @@ string ProcessParser::getProcUser(string pid)
             return result;
         }
     }
+    stream.close();
+    stream.clear();
     return "";
 }
 
